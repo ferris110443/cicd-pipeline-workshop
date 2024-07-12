@@ -2,7 +2,7 @@ name: deploy deployment workflow
 
 on:
     pull_request:
-      types: [closed]
+      types: [opened]
       branches:
         - main
 jobs:
