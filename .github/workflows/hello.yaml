@@ -25,7 +25,6 @@ jobs:
 
   second-job:
     runs-on: ubuntu-latest
-    needs: first-job
     steps:
       - run: echo "This job was tirggered by a ${{ github.event_name }} event"
       # 使用 actions/checkout 來 checkout repository
@@ -33,3 +32,9 @@ jobs:
       - name: checkout-repository
         uses: actions/checkout@v4
       - run: echo "job - Hello Actoins"
+  third-job:
+    runs-on: ubuntu-latest
+    needs: [first-job, second-job]
+    steps:
+      - run: echo "This job was tirggered by a ${{ github.event_name }} event"
+      - run: echo "job - Third job"
