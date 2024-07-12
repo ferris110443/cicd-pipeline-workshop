@@ -20,7 +20,7 @@ jobs:
           
 
   if_merged:
-    if : github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true
     needs: if_test
     runs-on: ubuntu-latest
     steps:
