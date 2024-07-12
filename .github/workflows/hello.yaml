@@ -22,6 +22,8 @@ jobs:
       - name: checkout-repository
         uses: actions/checkout@v4
       - run: echo "job - Hello Actoins"
+      - name: Try to fail
+        run: exit 1
   second-job:
     runs-on: ubuntu-latest
     # needs: first-job
@@ -38,3 +40,5 @@ jobs:
       - name: checkout-repository
         uses: actions/checkout@v4
       - run: echo "job - Hello Actoins third job"
+      - if: ${{ always() }}
+        run: echo "This job will always run"
