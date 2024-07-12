@@ -17,6 +17,14 @@ cp .env.example .env
 node src/server.js
 ```
 
+```bash
+npm install -g pm2
+
+pm2 start src/server.js
+
+pm2 restart src/server.js
+```
+
 ### API
 
 - GET /
