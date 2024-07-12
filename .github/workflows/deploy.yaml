@@ -8,7 +8,6 @@ on:
 jobs:
   if_test:
     runs-on: ubuntu-latest
-    needs: if_merged
     steps:
       - name : Test before deploy
         run: echo "Test before deploy successfully!"
@@ -17,11 +16,12 @@ jobs:
       - name : Install dependencies
         run: npm install
       - name : Run Tests
-        run: /home/ubuntu/cicd-pipeline-workshop/node_modules/.bin/nyc --reporter=html /home/ubuntu/cicd-pipeline-workshop/node_modules/.bin/mocha --reporter mochawesome
+        run: ./node_modules/.bin/nyc --reporter=html ./node_modules/.bin/mocha --reporter mochawesome
           
 
   if_merged:
-    if : github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true
+    needs: if_test
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to EC2
@@ -46,7 +46,7 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    needs: if_test
+    needs: if_merged
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
