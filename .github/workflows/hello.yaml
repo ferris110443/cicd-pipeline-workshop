@@ -22,3 +22,13 @@ jobs:
       - name: checkout-repository
         uses: actions/checkout@v4
       - run: echo "job - Hello Actoins"
+
+  second-job:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "This job was tirggered by a ${{ github.event_name }} event"
+      # 使用 actions/checkout 來 checkout repository
+      # 可能需要進行後續編譯或測試之類的
+      - name: checkout-repository
+        uses: actions/checkout@v4
+      - run: echo "job - Hello Actoins"
