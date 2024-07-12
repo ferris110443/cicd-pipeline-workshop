@@ -1,0 +1,23 @@
+name: Hello manual Actions
+
+on:
+    workflow_dispatch: # 手動觸發
+      inputs:
+        logLevel:
+          description: 'Log level'
+          required: true
+          default: 'warning'
+          type: choice
+          options:
+            - info
+            - warning
+            - debug
+jobs:
+  first-job:
+    # 指定運行環境，可以多個
+    runs-on: ubuntu-latest
+    # 指定工作流程的步驟(steps)
+    # 每個 step 可以用 run 來叫用其他 GitHub Actions
+    # 或是使用 run 來執行 shell 指令
+    steps:
+      - run: echo "job - Hello Actoins ${{inputs.logLevel}}"
